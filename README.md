@@ -20,9 +20,12 @@
 dsh plugin --profile web add dsh-runbook-ops
 ```
 
-本地开发时可在 DeepSeek Harness 仓库中加载 patch：
+本地开发时先构建插件，再在 DeepSeek Harness 仓库中加载 patch：
 
 ```bash
+cd C:/Users/admin/Desktop/code/dsh-runbook-ops
+npm run build
+cd C:/Users/admin/Desktop/code/deepseek-harness
 pnpm dsh web --patch C:/Users/admin/Desktop/code/dsh-runbook-ops/cordis.dev.yml
 ```
 
@@ -32,7 +35,7 @@ Headless 验证：
 pnpm dsh --profile headless --patch C:/Users/admin/Desktop/code/dsh-runbook-ops/cordis.dev.yml "按 release-preflight runbook 检查当前项目"
 ```
 
-> 这里的绝对路径只是本地开发示例。发布后的社区用户应使用自己的插件安装路径或 npm 包。
+> `--patch` 参数可以继续使用普通 Windows 路径；但 `cordis.dev.yml` 里的插件入口必须写成 `file:///C:/.../lib/index.js`，否则 Node ESM loader 会把 `C:` 当成不支持的协议。这里加载构建后的 JS 产物，避免不同 DSH 启动方式对 `.ts` loader 支持不一致。发布后的社区用户应使用自己的插件安装路径或 npm 包。
 
 ## Runbook 示例
 

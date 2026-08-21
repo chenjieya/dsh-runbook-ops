@@ -33,11 +33,16 @@ npm run hooks:install
 
 ## 本地加载插件
 
-在 DeepSeek Harness 仓库中执行：
+先在插件仓库构建，再到 DeepSeek Harness 仓库中执行：
 
 ```bash
+cd C:/Users/admin/Desktop/code/dsh-runbook-ops
+npm run build
+cd C:/Users/admin/Desktop/code/deepseek-harness
 pnpm dsh web --patch C:/Users/admin/Desktop/code/dsh-runbook-ops/cordis.dev.yml
 ```
+
+Windows 本地开发时，`cordis.dev.yml` 里的插件入口使用 `file:///C:/.../lib/index.js`。这是 Node ESM loader 的要求；裸路径 `C:/.../lib/index.js` 会报 `Received protocol 'c:'`。这里加载构建后的 JS 产物，避免不同 DSH 启动方式对 `.ts` loader 支持不一致。`--patch` 参数本身可以继续使用普通路径。
 
 Headless 验证：
 
