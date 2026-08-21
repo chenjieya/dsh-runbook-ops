@@ -1,0 +1,17 @@
+id: release-preflight
+title: Release preflight
+risk: medium
+steps:
+  - id: status
+    title: Check git status
+    kind: command
+    command: git status --short
+    required: true
+  - id: typecheck
+    title: Run typecheck
+    kind: command
+    command: npm run typecheck
+    required: false
+acceptance:
+  - Git status has been checked.
+  - Typecheck result is reported if available.
