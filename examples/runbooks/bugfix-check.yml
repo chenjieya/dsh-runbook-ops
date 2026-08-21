@@ -1,0 +1,28 @@
+id: bugfix-check
+title: Bugfix verification
+description: Verify a focused bug fix with targeted evidence.
+risk: low
+
+steps:
+  - id: read-context
+    title: Read the bug context
+    kind: read
+    path: docs/architecture.md
+    required: false
+
+  - id: targeted-test
+    title: Run the targeted regression test
+    kind: command
+    command: pnpm run test:unit
+    required: true
+
+  - id: diff-review
+    title: Review changed files for scope creep
+    kind: command
+    command: git diff --stat
+    required: true
+
+acceptance:
+  - The fix is covered by a targeted test or an explicit test gap is documented.
+  - The diff is limited to the bug surface.
+  - The final response names the verification commands run.

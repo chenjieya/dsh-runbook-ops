@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+lib/
+dist/
+coverage/
+.vitest/
+.cache/
+.tmp/
+tmp/
+*.tsbuildinfo
+
+# Package artifacts
+*.tgz
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Optional local runbook scratch files
+.dsh/local/

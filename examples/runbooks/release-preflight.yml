@@ -1,0 +1,41 @@
+id: release-preflight
+title: Release preflight
+description: Verify code, tests, and release readiness before publishing.
+risk: medium
+
+steps:
+  - id: workspace-status
+    title: Inspect working tree status
+    kind: command
+    command: git status --short
+    required: true
+
+  - id: typecheck
+    title: Run TypeScript typecheck
+    kind: command
+    command: pnpm run typecheck
+    required: true
+
+  - id: lint
+    title: Run lint checks
+    kind: command
+    command: pnpm run lint
+    required: true
+
+  - id: secret-check
+    title: Check that secrets are not staged
+    kind: check
+    text: Inspect changed files and generated artifacts for API keys, tokens, .env content, and credential material.
+    required: true
+
+  - id: publish-approval
+    title: Confirm release continuation
+    kind: approval
+    message: Confirm tests and secret checks are acceptable before continuing release work.
+    required: true
+
+acceptance:
+  - Working tree changes are understood and intentional.
+  - Typecheck passes or the failure is documented with owner and next action.
+  - Lint passes or the failure is documented with owner and next action.
+  - No secret material is present in committed or generated files.

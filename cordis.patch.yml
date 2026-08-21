@@ -1,0 +1,6 @@
+- insert:
+    - id: runbook-ops
+      name: dsh-runbook-ops
+      config:
+        root: .dsh/runbooks
+        maxBytes: 65536

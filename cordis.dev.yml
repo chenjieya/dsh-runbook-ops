@@ -1,0 +1,6 @@
+- insert:
+    - id: runbook-ops
+      name: C:/Users/admin/Desktop/code/dsh-runbook-ops/src/index.ts
+      config:
+        root: .dsh/runbooks
+        maxBytes: 65536
